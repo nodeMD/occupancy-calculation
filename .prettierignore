@@ -1,0 +1,7 @@
+node_modules
+playwright-report
+.github
+*.json
+*.md
+*.css
+*.html
