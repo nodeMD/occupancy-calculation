@@ -1,0 +1,116 @@
+import { Locator, Page, expect } from "@playwright/test";
+
+export class CalculationPage {
+  readonly page: Page;
+  readonly premiumRoomsInput: Locator;
+  readonly economyRoomsInput: Locator;
+  readonly freePremiumRooms: Locator;
+  readonly freeEconomyRooms: Locator;
+  readonly premiumOccupancy: Locator;
+  readonly economyOccupancy: Locator;
+  readonly calculateButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.premiumRoomsInput = page.getByLabel("Premium Rooms Input");
+    this.economyRoomsInput = page.getByLabel("Economy Rooms Input");
+    this.freePremiumRooms = page.getByTestId("freePremiumRooms");
+    this.freeEconomyRooms = page.getByTestId("freeEconomyRooms");
+    this.premiumOccupancy = page.getByTestId("premiumOccupancy");
+    this.economyOccupancy = page.getByTestId("economyOccupancy");
+    this.calculateButton = page.getByRole("button", {
+      name: "Calculate Occupancy",
+    });
+  }
+
+  async calculateOccupancy() {
+    await this.calculateButton.click();
+  }
+
+  async checkIfCalculateButtonIsEnabled() {
+    await expect(this.calculateButton).toBeEnabled();
+  }
+
+  async checkIfCalculateButtonIsDisabled() {
+    await expect(this.calculateButton).toBeDisabled();
+  }
+
+  async fillForm(premiumRooms: number, economyRooms: number) {
+    await this.premiumRoomsInput.fill(premiumRooms.toString());
+    await this.economyRoomsInput.fill(economyRooms.toString());
+  }
+
+  async clearForm() {
+    await this.premiumRoomsInput.clear();
+    await this.economyRoomsInput.clear();
+  }
+
+  async checkValuesFromInputsNotEqual(
+    expectedPremiumRoom: number,
+    expectedEconomyRoom: number
+  ) {
+    await expect(this.premiumRoomsInput.inputValue()).not.toEqual(
+      expectedPremiumRoom
+    );
+    await expect(this.economyRoomsInput.inputValue()).not.toEqual(
+      expectedEconomyRoom
+    );
+  }
+
+  async checIfkNumberOfFreeRoomsIs(
+    premiumRoomsFree: number,
+    economyRoomsFree: number
+  ) {
+    await expect(
+      this.page.getByText(`Free Premium rooms: ${premiumRoomsFree}`)
+    ).toBeVisible();
+    await expect(
+      this.page.getByText(`Free Economy rooms: ${economyRoomsFree}`)
+    ).toBeVisible();
+  }
+
+  async checIfkNumberOfFreeRoomsIsNot(
+    premiumRoomsFree: number,
+    economyRoomsFree: number
+  ) {
+    await expect(
+      this.page.getByText(`Free Premium rooms: ${premiumRoomsFree}`)
+    ).toBeHidden();
+    await expect(
+      this.page.getByText(`Free Economy rooms: ${economyRoomsFree}`)
+    ).toBeHidden();
+  }
+
+  async checkIfRoomsUsageAndRevenueIs(
+    premiumRoomsUsage: number,
+    premiumRoomsRevenue: number,
+    economyRoomsUsage: number,
+    economyRoomsRevenue: number
+  ) {
+    await expect(
+      this.page.getByText(
+        `Usage Premium: ${premiumRoomsUsage} (EUR ${premiumRoomsRevenue})`
+      )
+    ).toBeVisible();
+    await expect(
+      this.page.getByText(
+        `Usage Economy: ${economyRoomsUsage} (EUR ${economyRoomsRevenue})`
+      )
+    ).toBeVisible();
+  }
+
+  async checkIfResultsAreNotVisible() {
+    await expect(this.freePremiumRooms).toBeHidden();
+    await expect(this.freeEconomyRooms).toBeHidden();
+    await expect(this.premiumOccupancy).toBeHidden();
+    await expect(this.economyOccupancy).toBeHidden();
+  }
+
+  async getFreeEconomyRooms() {
+    return await this.freeEconomyRooms.textContent();
+  }
+
+  async getFreePremiumRooms() {
+    return await this.freePremiumRooms.textContent();
+  }
+}

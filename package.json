@@ -10,6 +10,7 @@
     "@types/node": "^16.18.21",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
+    "playwright": "^1.39.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,7 +21,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .ts ./ --color --max-warnings=0",
+    "lint:fix": "eslint --ext .ts ./ --color --fix",
+    "test:e2e": "playwright test",
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "prettier": "^2.8.1"
   }
 }
