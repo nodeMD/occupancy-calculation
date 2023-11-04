@@ -57,6 +57,7 @@ function App() {
           <div>
             <p>Premium Rooms:</p>
             <input
+              aria-label="Premium Rooms Input"
               type="number"
               value={premiumRooms}
               onChange={(event) =>
@@ -68,6 +69,7 @@ function App() {
           <div>
             <p>Economy Rooms:</p>
             <input
+              aria-label="Economy Rooms Input"
               type="number"
               value={economyRooms}
               onChange={(event) =>
