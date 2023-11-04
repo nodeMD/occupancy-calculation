@@ -7,7 +7,10 @@ test("verify occupancy calculation for 3 premium and 3 economy rooms", () => {
   const expectedEconomyOccupancy = 3;
   const expectedPremiumRevenue = 738;
   const expectedEconomyRevenue = 167;
-  const result = exportedForTesting.calculateOccupancy(premiumRooms, economyRooms);
+  const result = exportedForTesting.calculateOccupancy(
+    premiumRooms,
+    economyRooms
+  );
   expect(result.premiumOccupancy).toEqual(expectedPremiumOccupancy);
   expect(result.economyOccupancy).toEqual(expectedEconomyOccupancy);
   expect(result.premiumRevenue).toEqual(expectedPremiumRevenue);
@@ -21,7 +24,10 @@ test("verify occupancy calculation for 7 premium and 5 economy rooms", () => {
   const expectedEconomyOccupancy = 4;
   const expectedPremiumRevenue = 1054;
   const expectedEconomyRevenue = 189;
-  const result = exportedForTesting.calculateOccupancy(premiumRooms, economyRooms);
+  const result = exportedForTesting.calculateOccupancy(
+    premiumRooms,
+    economyRooms
+  );
   expect(result.premiumOccupancy).toEqual(expectedPremiumOccupancy);
   expect(result.economyOccupancy).toEqual(expectedEconomyOccupancy);
   expect(result.premiumRevenue).toEqual(expectedPremiumRevenue);
@@ -35,7 +41,10 @@ test("verify occupancy calculation for 2 premium and 7 economy rooms", () => {
   const expectedEconomyOccupancy = 4;
   const expectedPremiumRevenue = 583;
   const expectedEconomyRevenue = 189;
-  const result = exportedForTesting.calculateOccupancy(premiumRooms, economyRooms);
+  const result = exportedForTesting.calculateOccupancy(
+    premiumRooms,
+    economyRooms
+  );
   expect(result.premiumOccupancy).toEqual(expectedPremiumOccupancy);
   expect(result.economyOccupancy).toEqual(expectedEconomyOccupancy);
   expect(result.premiumRevenue).toEqual(expectedPremiumRevenue);
@@ -49,7 +58,10 @@ test("verify occupancy calculation for 7 premium and 1 economy rooms (check if h
   const expectedEconomyOccupancy = 1;
   const expectedPremiumRevenue = 1153;
   const expectedEconomyRevenue = 45;
-  const result = exportedForTesting.calculateOccupancy(premiumRooms, economyRooms);
+  const result = exportedForTesting.calculateOccupancy(
+    premiumRooms,
+    economyRooms
+  );
   expect(result.premiumOccupancy).toEqual(expectedPremiumOccupancy);
   expect(result.economyOccupancy).toEqual(expectedEconomyOccupancy);
   expect(result.premiumRevenue).toEqual(expectedPremiumRevenue);
