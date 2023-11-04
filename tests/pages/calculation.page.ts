@@ -105,4 +105,12 @@ export class CalculationPage {
     await expect(this.premiumOccupancy).toBeHidden();
     await expect(this.economyOccupancy).toBeHidden();
   }
+
+  async getFreeEconomyRooms() {
+    return await this.freeEconomyRooms.textContent();
+  }
+
+  async getFreePremiumRooms() {
+    return await this.freePremiumRooms.textContent();
+  }
 }
