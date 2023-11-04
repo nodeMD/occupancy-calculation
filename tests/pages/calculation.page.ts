@@ -4,12 +4,20 @@ export class CalculationPage {
   readonly page: Page;
   readonly premiumRoomsInput: Locator;
   readonly economyRoomsInput: Locator;
+  readonly freePremiumRooms: Locator;
+  readonly freeEconomyRooms: Locator;
+  readonly premiumOccupancy: Locator;
+  readonly economyOccupancy: Locator;
   readonly calculateButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.premiumRoomsInput = page.getByLabel("Premium Rooms Input");
     this.economyRoomsInput = page.getByLabel("Economy Rooms Input");
+    this.freePremiumRooms = page.getByTestId("freePremiumRooms");
+    this.freeEconomyRooms = page.getByTestId("freeEconomyRooms");
+    this.premiumOccupancy = page.getByTestId("premiumOccupancy");
+    this.economyOccupancy = page.getByTestId("economyOccupancy");
     this.calculateButton = page.getByRole("button", {
       name: "Calculate Occupancy",
     });
