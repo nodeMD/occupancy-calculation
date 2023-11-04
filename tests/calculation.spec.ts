@@ -54,4 +54,23 @@ test.describe("occupancy calculation tests", async () => {
     await calculationPage.checkIfCalculateButtonIsDisabled();
     await calculationPage.checkIfResultsAreNotVisible();
   });
+
+  test("check if form is not updated before clicking the calculate button", async ({
+    page,
+  }) => {
+    const calculationPage = new CalculationPage(page);
+    const premiumRooms = 3;
+    const economyRooms = 3;
+    const editPremiumRooms = 5;
+    const editEconomyRooms = 2;
+    await calculationPage.fillForm(premiumRooms, economyRooms);
+    await calculationPage.calculateOccupancy();
+    const preFillPremiumRooms = await calculationPage.getFreePremiumRooms();
+    const preFillEconomyRooms = await calculationPage.getFreeEconomyRooms();
+    await calculationPage.fillForm(editPremiumRooms, editEconomyRooms);
+    const afterFillPremiumRooms = await calculationPage.getFreePremiumRooms();
+    const afterFillEconomyRooms = await calculationPage.getFreeEconomyRooms();
+    await expect(preFillPremiumRooms).toEqual(afterFillPremiumRooms);
+    await expect(preFillEconomyRooms).toEqual(afterFillEconomyRooms);
+  });
 });
