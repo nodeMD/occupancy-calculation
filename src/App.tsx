@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 
 const GUESTS = [23, 45, 155, 374, 22, 99, 100, 101, 115, 209];
@@ -35,6 +35,9 @@ function calculateOccupancy(premiumRooms: any, economyRooms: any) {
     economyRevenue,
   };
 }
+export const exportedForTesting = {
+  calculateOccupancy,
+};
 
 function App() {
   const [premiumRooms, setPremiumRooms] = useState(0);
