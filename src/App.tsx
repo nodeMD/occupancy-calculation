@@ -3,7 +3,7 @@ import "./App.css";
 
 const GUESTS = [23, 45, 155, 374, 22, 99, 100, 101, 115, 209];
 
-function calculateOccupancy(premiumRooms: any, economyRooms: any) {
+function calculateOccupancy(premiumRooms: number, economyRooms: number) {
   const sortedGuests = [...GUESTS].sort((a, b) => b - a);
   let economyGuests = sortedGuests.filter((guest) => guest < 100);
   let premiumOccupancy = 0;
@@ -50,6 +50,8 @@ function App() {
   const [premiumRooms, setPremiumRooms] = useState(0);
   const [economyRooms, setEconomyRooms] = useState(0);
   const [occupancy, setOccupancy] = useState<any>(null);
+  let [premiumRoomsForCalculation, setPremiumRoomsForCalculation] = useState(0);
+  let [economyRoomsForCalculation, setEconomyRoomsForCalculation] = useState(0);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -89,8 +91,12 @@ function App() {
             />
           </div>
           <br />
-          <button 
+          <button
             disabled={!premiumRooms && !economyRooms}
+            onClick={() => {
+              setPremiumRoomsForCalculation(premiumRooms);
+              setEconomyRoomsForCalculation(economyRooms);
+            }}
             type="submit"
           >
             Calculate Occupancy
@@ -99,10 +105,10 @@ function App() {
         {occupancy && (
           <div>
             <p data-testid="freePremiumRooms">
-              Free Premium rooms: {premiumRooms - occupancy.premiumOccupancy}
+              Free Premium rooms: {premiumRoomsForCalculation - occupancy.premiumOccupancy}
             </p>
             <p data-testid="freeEconomyRooms">
-              Free Economy rooms: {economyRooms - occupancy.economyOccupancy}
+              Free Economy rooms: {economyRoomsForCalculation - occupancy.economyOccupancy}
             </p>
             <p data-testid="premiumOccupancy">
               Usage Premium: {occupancy.premiumOccupancy} (EUR{" "}
