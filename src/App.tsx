@@ -66,10 +66,12 @@ function App() {
             <input
               aria-label="Premium Rooms Input"
               type="number"
-              value={premiumRooms}
-              onChange={(event) =>
-                setPremiumRooms(parseInt(event.target.value, 10))
-              }
+              value={premiumRooms.toString()}
+              onChange={(event) => {
+                let val = parseInt(event.target.value, 10);
+                val = val >= 0 ? val : 0;
+                setPremiumRooms(val);
+              }}
             />
           </div>
           <br />
@@ -78,10 +80,12 @@ function App() {
             <input
               aria-label="Economy Rooms Input"
               type="number"
-              value={economyRooms}
-              onChange={(event) =>
-                setEconomyRooms(parseInt(event.target.value, 10))
-              }
+              value={economyRooms.toString()}
+              onChange={(event) => {
+                let val = parseInt(event.target.value, 10);
+                val = val >= 0 ? val : 0;
+                setEconomyRooms(val);
+              }}
             />
           </div>
           <br />
