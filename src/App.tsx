@@ -82,17 +82,17 @@ function App() {
         </form>
         {occupancy && (
           <div>
-            <p>
+            <p data-testid="freePremiumRooms">
               Free Premium rooms: {premiumRooms - occupancy.premiumOccupancy}
             </p>
-            <p>
+            <p data-testid="freeEconomyRooms">
               Free Economy rooms: {economyRooms - occupancy.economyOccupancy}
             </p>
-            <p>
+            <p data-testid="premiumOccupancy">
               Usage Premium: {occupancy.premiumOccupancy} (EUR{" "}
               {occupancy.premiumRevenue})
             </p>
-            <p>
+            <p data-testid="economyOccupancy">
               Usage Economy: {occupancy.economyOccupancy} (EUR{" "}
               {occupancy.economyRevenue})
             </p>
