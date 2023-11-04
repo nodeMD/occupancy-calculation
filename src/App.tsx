@@ -89,7 +89,12 @@ function App() {
             />
           </div>
           <br />
-          <button type="submit">Calculate Occupancy</button>
+          <button 
+            disabled={!premiumRooms && !economyRooms}
+            type="submit"
+          >
+            Calculate Occupancy
+          </button>
         </form>
         {occupancy && (
           <div>
