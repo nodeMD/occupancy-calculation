@@ -40,6 +40,23 @@ export class CalculationPage {
     await this.economyRoomsInput.fill(economyRooms.toString());
   }
 
+  async clearForm() {
+    await this.premiumRoomsInput.clear();
+    await this.economyRoomsInput.clear();
+  }
+
+  async checkValuesFromInputsNotEqual(
+    expectedPremiumRoom: number,
+    expectedEconomyRoom: number
+  ) {
+    await expect(this.premiumRoomsInput.inputValue()).not.toEqual(
+      expectedPremiumRoom
+    );
+    await expect(this.economyRoomsInput.inputValue()).not.toEqual(
+      expectedEconomyRoom
+    );
+  }
+
   async checIfkNumberOfFreeRoomsIs(
     premiumRoomsFree: number,
     economyRoomsFree: number
@@ -50,6 +67,18 @@ export class CalculationPage {
     await expect(
       this.page.getByText(`Free Economy rooms: ${economyRoomsFree}`)
     ).toBeVisible();
+  }
+
+  async checIfkNumberOfFreeRoomsIsNot(
+    premiumRoomsFree: number,
+    economyRoomsFree: number
+  ) {
+    await expect(
+      this.page.getByText(`Free Premium rooms: ${premiumRoomsFree}`)
+    ).toBeHidden();
+    await expect(
+      this.page.getByText(`Free Economy rooms: ${economyRoomsFree}`)
+    ).toBeHidden();
   }
 
   async checkIfRoomsUsageAndRevenueIs(
@@ -68,5 +97,12 @@ export class CalculationPage {
         `Usage Economy: ${economyRoomsUsage} (EUR ${economyRoomsRevenue})`
       )
     ).toBeVisible();
+  }
+
+  async checkIfResultsAreNotVisible() {
+    await expect(this.freePremiumRooms).toBeHidden();
+    await expect(this.freeEconomyRooms).toBeHidden();
+    await expect(this.premiumOccupancy).toBeHidden();
+    await expect(this.economyOccupancy).toBeHidden();
   }
 }
