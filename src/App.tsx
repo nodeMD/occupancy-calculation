@@ -105,10 +105,12 @@ function App() {
         {occupancy && (
           <div>
             <p data-testid="freePremiumRooms">
-              Free Premium rooms: {premiumRoomsForCalculation - occupancy.premiumOccupancy}
+              Free Premium rooms:{" "}
+              {premiumRoomsForCalculation - occupancy.premiumOccupancy}
             </p>
             <p data-testid="freeEconomyRooms">
-              Free Economy rooms: {economyRoomsForCalculation - occupancy.economyOccupancy}
+              Free Economy rooms:{" "}
+              {economyRoomsForCalculation - occupancy.economyOccupancy}
             </p>
             <p data-testid="premiumOccupancy">
               Usage Premium: {occupancy.premiumOccupancy} (EUR{" "}
