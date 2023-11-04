@@ -5,26 +5,33 @@ const GUESTS = [23, 45, 155, 374, 22, 99, 100, 101, 115, 209];
 
 function calculateOccupancy(premiumRooms: any, economyRooms: any) {
   const sortedGuests = [...GUESTS].sort((a, b) => b - a);
+  let economyGuests = sortedGuests.filter((guest) => guest < 100);
   let premiumOccupancy = 0;
   let economyOccupancy = 0;
   let premiumRevenue = 0;
   let economyRevenue = 0;
 
   for (const guest of sortedGuests) {
-    if (guest >= 100) {
-      continue;
-    }
-
-    if (premiumRooms > 0) {
+    if (guest >= 100 && premiumRooms > 0) {
       premiumOccupancy++;
       premiumRevenue += guest;
       premiumRooms--;
-    } else if (economyRooms > 0) {
+    } else if (economyRooms == 0 && premiumRooms > 0) {
+      const highestPayingEconomyGuest = Math.max(...economyGuests);
+      premiumOccupancy++;
+      premiumRooms--;
+      // remove highest paying economy guest from economy room
+      // and on his place put next economy guest
+      economyRevenue -= highestPayingEconomyGuest;
+      economyRevenue += guest;
+      premiumRevenue += highestPayingEconomyGuest;
+      // remove highest paying economy guest from economy guests
+      let guestIndex = economyGuests.indexOf(highestPayingEconomyGuest);
+      economyGuests.splice(guestIndex, 1);
+    } else if (guest < 100 && economyRooms > 0) {
       economyOccupancy++;
       economyRevenue += guest;
       economyRooms--;
-    } else {
-      break;
     }
   }
 
